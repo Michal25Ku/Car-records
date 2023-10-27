@@ -3,18 +3,19 @@
     public class BirthCalculator
     {
         public string? FirstName { get; set; }
-        public DateTime? BirthDate { get; set; }
+        public DateTime BirthDate { get; set; } = DateTime.Now;
 
         public bool IsValid()
         {
-            return FirstName != null && BirthDate != null;
+            return FirstName != null && BirthDate <= DateTime.Now;
         }
 
-        public int Birth()
+        public int Years()
         {
-            var years = (DateTime.Now - BirthDate);
+            TimeSpan TimeDiference = DateTime.Now - BirthDate;
+            var years = (int)(TimeDiference.Days / 365.25);
 
-            return 1;
+            return years;
         }
     }
 }

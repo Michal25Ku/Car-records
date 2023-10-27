@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Laboratorium2.Controllers
 {
-    public class BirthControllerController : Controller
+    public class BirthController : Controller
     {
         public IActionResult Index()
         {
