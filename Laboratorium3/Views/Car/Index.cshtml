@@ -1,0 +1,66 @@
+﻿@model Dictionary<int, Car>
+
+<h2>Lista samochodów</h2>
+<table class="table">
+    <tr>
+        <th scope="col">
+            
+        </th>
+        <th scope="col">
+            Model
+        </th>
+        <th scope="col">
+            Producent
+        </th>
+        <th scope="col">
+            Numer rejestracyjny
+        </th>
+        <th>
+            Imie wlasciciela
+        </th>
+        <th scope="col">
+            Nazwisko wlasciciela
+        </th>
+    </tr>
+    @foreach (var (index,car) in @Model)
+    {
+        <tr>
+            <th scope="row">@index</th>
+            <td>
+                @car.Model
+            </td>
+            <td>
+                @car.Producer
+            </td>
+            <td>
+                @car.LicensePlateNumber
+            </td>
+            <td>
+                @car.Owner.FirstName
+            </td>
+            <td>
+                @car.Owner.LastName
+            </td>
+            <td>
+                <a class="btn btn-primary"
+                    asp-action="EditCar"
+                    asp-controller="Car"
+                    asp-route-id=@car.Id>
+                    Edytuj
+                </a>
+                <a class="btn btn-primary"
+                    asp-action="DetailsCar"
+                    asp-controller="Car"
+                    asp-route-id=@car.Id>
+                    Szczegoly
+                </a>
+                <a class="btn btn-primary"
+                    asp-action="DeleteCar"
+                    asp-controller="Car"
+                    asp-route-id=@car.Id>
+                    Usun
+                </a>
+            </td>
+        </tr>
+    }
+</table>

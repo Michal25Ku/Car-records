@@ -1,0 +1,91 @@
+﻿@using Laboratorium3.Models
+@model Car
+<h2>Utworz nowy pojazd</h2>
+<form asp-action="CreateCar" asp-controller="Car" method="post">
+    @*<div asp-validation-summary="All"></div>*@
+    <div>
+        Dane samochodu:
+        <div>
+            <label asp-for="Model">Model samochodu</label>
+            <input class="form-control" type="text" asp-for="Model" />
+            <div>
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="Producer">Producent samochodu</label>
+            <input class="form-control" type="text" asp-for="Producer" />
+            <div>
+                <span asp-validation-for="Producer" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="EngineCapacity">Pojemnosc silnika</label>
+            <input class="form-control" type="number" asp-for="EngineCapacity" step="0.1"/>
+            <div>
+                <span asp-validation-for="EngineCapacity" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="EnginePower">Moc silnika</label>
+            <input class="form-control" type="number" asp-for="EnginePower"/>
+            <div>
+                <span asp-validation-for="EnginePower" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="EngineType">Typ silnika</label>
+            <input class="form-control" type="text" asp-for="EngineType" />
+            <div>
+                <span asp-validation-for="EngineType" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="LicensePlateNumber">Numer rejestracyjny samochodu</label>
+            <input class="form-control" type="text" asp-for="LicensePlateNumber" />
+            <div>
+                <span asp-validation-for="LicensePlateNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <hr />
+        <br>
+        Dane kontaktowe wlasciciela:
+        <div>
+            <label asp-for="Owner.FirstName">Imie</label>
+            <input class="form-control" type="text" asp-for="Owner.FirstName" />
+            <div>
+                <span asp-validation-for="Owner.FirstName" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="Owner.LastName">Nazwisko</label>
+            <input class="form-control" type="text" asp-for="Owner.LastName" />
+            <div>
+                <span asp-validation-for="Owner.LastName" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="Owner.PhoneNumber">Numer telefonu</label>
+            <input class="form-control" type="text" asp-for="Owner.PhoneNumber" />
+            <div>
+                <span asp-validation-for="Owner.PhoneNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="Owner.Email">Adres email</label>
+            <input class="form-control" type="text" asp-for="Owner.Email" />
+            <div>
+                <span asp-validation-for="Owner.Email" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <button class="btn" type="submit">Zapisz</button>
+</form>

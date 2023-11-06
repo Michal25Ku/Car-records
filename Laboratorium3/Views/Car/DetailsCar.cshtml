@@ -1,0 +1,38 @@
+﻿@using Laboratorium3.Models
+@model Car
+
+<h2>Szczegoly pojazdu:</h2>
+
+<div class="Text-info">
+    Model: @Model.Model
+</div>
+<div class="table-info">
+    Producent: @Model.Producer
+</div>
+<div class="table-info">
+    Pojemnosc silnika: @Model.EngineCapacity
+</div>
+<div class="table-info">
+    Moc silnika: @Model.EnginePower
+</div>
+<div class="table-info">
+    Typ silnika: @Model.EngineType
+</div>
+<div class="table-info">
+    Numer rejestracyjny: @Model.LicensePlateNumber
+</div>
+<div class="table-info">
+    Imie wlasciciela: @Model.Owner.FirstName
+</div>
+<div class="table-info">
+    Nazwisko wlasciciela: @Model.Owner.LastName
+</div>
+<div class="table-info">
+    Numer telefonu wlasciciela: @Model.Owner.PhoneNumber
+</div>
+<div class="table-info">
+    Email wlasciciela: @Model.Owner.Email
+</div>
+<form asp-action="DetailsCar" asp-controller="Car" method="post">
+    <button type="submit">Wróć</button>
+</form>
