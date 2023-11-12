@@ -6,6 +6,13 @@
     <div>
         Dane samochodu:
         <div>
+            <label asp-for="Priority"></label>
+            <select class="form-control" asp-for="Priority" asp-items="@Html.GetEnumSelectList<Priority>()"></select>
+            <div>
+                <span asp-validation-for="Priority" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
             <label asp-for="Model">Model samochodu</label>
             <input class="form-control" type="text" asp-for="Model" value="@Model.Model"/>
             <div>

@@ -6,29 +6,16 @@ namespace Laboratorium3.Controllers
 {
     public class CarController : Controller
     {
-        static Car testCar = new Car()
-        {
-            Id = 1,
-            Model = "Felicia",
-            Producer = "Skoda",
-            EngineCapacity = "1.6",
-            EnginePower = 90,
-            EngineType = "Benzynowy",
-            LicensePlateNumber = "KR 92L",
-            Owner = new CarContactDetails()
-            {
-                FirstName = "Michal",
-                LastName = "Kuciak",
-                PhoneNumber = "+48193024765",
-                Email = "michal@gmail.com"
-            }
-        };
+        private readonly ICarService _carService;
 
-        static Dictionary<int, Car> _cars = new Dictionary<int, Models.Car>() { { 1, testCar } };
+        public CarController(ICarService carService)
+        {
+            _carService = carService;
+        }
 
         public IActionResult Index()
         {
-            return View(_cars);
+            return View(_carService.FindAll());
         }
 
         [HttpGet]
@@ -42,10 +29,7 @@ namespace Laboratorium3.Controllers
         {
             if (ModelState.IsValid)
             {
-                int id = _cars.Keys.Count != 0 ? _cars.Keys.Max() : 0;
-                car.Id = id + 1;
-                _cars.Add(car.Id, car);
-
+                _carService.Add(car);
                 return RedirectToAction("Index");
             }
             else
@@ -57,9 +41,9 @@ namespace Laboratorium3.Controllers
         [HttpGet]
         public IActionResult EditCar(int id)
         {
-            if (_cars.Keys.Contains(id))
+            if (_carService.FindById(id) is not null)
             {
-                return View(_cars[id]);
+                return View(_carService.FindById(id));
             }
             else
             {
@@ -72,8 +56,7 @@ namespace Laboratorium3.Controllers
         {
             if (ModelState.IsValid)
             {
-                _cars[car.Id] = car;
-
+                _carService.Update(car);
                 return RedirectToAction("Index");
             }
             else
@@ -85,9 +68,9 @@ namespace Laboratorium3.Controllers
         [HttpGet]
         public IActionResult DeleteCar(int id)
         {
-            if (_cars.Keys.Contains(id))
+            if (_carService.FindById(id) is not null)
             {
-                return View(_cars[id]);
+                return View(_carService.FindById(id));
             }
             else
             {
@@ -98,17 +81,16 @@ namespace Laboratorium3.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            _cars.Remove(id);
-
+            _carService.Delete(id);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult DetailsCar(int id)
         {
-            if (_cars.Keys.Contains(id))
+            if (_carService.FindById(id) is not null)
             {
-                return View(_cars[id]);
+                return View(_carService.FindById(id));
             }
             else
             {

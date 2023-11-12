@@ -1,31 +1,35 @@
-﻿@model Dictionary<int, Car>
+﻿@model List<Car>
 
 <h2>Lista samochodów</h2>
+@if(Model.Count > 0)
+{
 <table class="table">
     <tr>
         <th scope="col">
-            
+            @Html.DisplayNameFor(model => model[0].Model)
         </th>
         <th scope="col">
-            Model
+            @Html.DisplayNameFor(model => model[0].Producer)
         </th>
         <th scope="col">
-            Producent
-        </th>
-        <th scope="col">
-            Numer rejestracyjny
+            @Html.DisplayNameFor(model => model[0].LicensePlateNumber)
         </th>
         <th>
-            Imie wlasciciela
+            @Html.DisplayNameFor(model => model[0].Owner.FirstName)
         </th>
         <th scope="col">
-            Nazwisko wlasciciela
+            @Html.DisplayNameFor(model => model[0].Owner.LastName)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model[0].Priority)
+        </th>
+        <th scope="col">
+
         </th>
     </tr>
-    @foreach (var (index,car) in @Model)
+    @foreach (var car in @Model)
     {
         <tr>
-            <th scope="row">@index</th>
             <td>
                 @car.Model
             </td>
@@ -40,6 +44,9 @@
             </td>
             <td>
                 @car.Owner.LastName
+            </td>
+            <td>
+                @car.Priority.GetDisplayName()
             </td>
             <td>
                 <a class="btn btn-primary"
@@ -64,3 +71,4 @@
         </tr>
     }
 </table>
+}

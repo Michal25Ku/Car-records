@@ -6,7 +6,14 @@
     <div>
         Dane samochodu:
         <div>
-            <label asp-for="Model">Model samochodu</label>
+            <label asp-for="Priority"></label>
+            <select class="form-control" asp-for="Priority" asp-items="@Html.GetEnumSelectList<Priority>()"></select>
+            <div>
+                <span asp-validation-for="Priority" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <label asp-for="Model"></label>
             <input class="form-control" type="text" asp-for="Model" />
             <div>
                 <span asp-validation-for="Model" class="text-danger"></span>
@@ -14,7 +21,7 @@
         </div>
         <br>
         <div>
-            <label asp-for="Producer">Producent samochodu</label>
+            <label asp-for="Producer"></label>
             <input class="form-control" type="text" asp-for="Producer" />
             <div>
                 <span asp-validation-for="Producer" class="text-danger"></span>
@@ -22,7 +29,7 @@
         </div>
         <br>
         <div>
-            <label asp-for="EngineCapacity">Pojemnosc silnika</label>
+            <label asp-for="EngineCapacity"></label>
             <input class="form-control" type="number" asp-for="EngineCapacity" step="0.1"/>
             <div>
                 <span asp-validation-for="EngineCapacity" class="text-danger"></span>
@@ -30,7 +37,7 @@
         </div>
         <br>
         <div>
-            <label asp-for="EnginePower">Moc silnika</label>
+            <label asp-for="EnginePower"></label>
             <input class="form-control" type="number" asp-for="EnginePower"/>
             <div>
                 <span asp-validation-for="EnginePower" class="text-danger"></span>
@@ -38,7 +45,7 @@
         </div>
         <br>
         <div>
-            <label asp-for="EngineType">Typ silnika</label>
+            <label asp-for="EngineType"></label>
             <input class="form-control" type="text" asp-for="EngineType" />
             <div>
                 <span asp-validation-for="EngineType" class="text-danger"></span>
@@ -46,7 +53,7 @@
         </div>
         <br>
         <div>
-            <label asp-for="LicensePlateNumber">Numer rejestracyjny samochodu</label>
+            <label asp-for="LicensePlateNumber"></label>
             <input class="form-control" type="text" asp-for="LicensePlateNumber" />
             <div>
                 <span asp-validation-for="LicensePlateNumber" class="text-danger"></span>
@@ -56,7 +63,7 @@
         <br>
         Dane kontaktowe wlasciciela:
         <div>
-            <label asp-for="Owner.FirstName">Imie</label>
+            <label asp-for="Owner.FirstName"></label>
             <input class="form-control" type="text" asp-for="Owner.FirstName" />
             <div>
                 <span asp-validation-for="Owner.FirstName" class="text-danger"></span>
@@ -64,7 +71,7 @@
         </div>
         <br>
         <div>
-            <label asp-for="Owner.LastName">Nazwisko</label>
+            <label asp-for="Owner.LastName"></label>
             <input class="form-control" type="text" asp-for="Owner.LastName" />
             <div>
                 <span asp-validation-for="Owner.LastName" class="text-danger"></span>
@@ -72,7 +79,7 @@
         </div>
         <br>
         <div>
-            <label asp-for="Owner.PhoneNumber">Numer telefonu</label>
+            <label asp-for="Owner.PhoneNumber"></label>
             <input class="form-control" type="text" asp-for="Owner.PhoneNumber" />
             <div>
                 <span asp-validation-for="Owner.PhoneNumber" class="text-danger"></span>
@@ -80,7 +87,7 @@
         </div>
         <br>
         <div>
-            <label asp-for="Owner.Email">Adres email</label>
+            <label asp-for="Owner.Email"></label>
             <input class="form-control" type="text" asp-for="Owner.Email" />
             <div>
                 <span asp-validation-for="Owner.Email" class="text-danger"></span>

@@ -33,6 +33,9 @@
 <div class="table-info">
     Email wlasciciela: @Model.Owner.Email
 </div>
+<div class="table-info">
+    Priorytet: @Model.Priority.GetDisplayName();
+</div>
 <form asp-action="DetailsCar" asp-controller="Car" method="post">
     <button type="submit">Wróć</button>
 </form>
