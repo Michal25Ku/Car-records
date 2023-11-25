@@ -22,7 +22,7 @@ namespace Laboratorium3.Models
 
         [Required(ErrorMessage = "Proszę podać Moc silnika!")]
         [Display(Name = "Moc silnika")]
-        public int? EnginePower { get; set; }
+        public int EnginePower { get; set; }
 
         [Required(ErrorMessage = "Proszę podać typ silnika!")]
         [Display(Name = "Typ silnika")]
@@ -36,8 +36,8 @@ namespace Laboratorium3.Models
 
         [Display(Name = "Priorytet")]
         public Priority Priority { get; set; }
-
+       
         [HiddenInput]
-        public DateTime? Created { get; set; }
+        public DateTime Created { get; set; }
     }
 }
