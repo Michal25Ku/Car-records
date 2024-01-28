@@ -1,4 +1,5 @@
 ﻿using Data;
+using Laboratorium3.Mappers;
 
 namespace Laboratorium3.Models
 {
@@ -13,8 +14,9 @@ namespace Laboratorium3.Models
 
         public int Add(Car car)
         {
-            _context.Cars.Add(CarMapper.ToEntity(car));
-            return _context.SaveChanges();
+            var e = _context.Cars.Add(CarMapper.ToEntity(car));
+            _context.SaveChanges();
+            return e.Entity.CarId;
         }
 
         public void Delete(int id)
@@ -34,15 +36,7 @@ namespace Laboratorium3.Models
 
         public Car? FindById(int id)
         {
-            var entity = _context.Cars.Find(id);
-            if(entity != null)
-            {
-                return CarMapper.FromEntity(entity);
-            }
-            else
-            {
-                return null;
-            }
+            return CarMapper.FromEntity(_context.Cars.Find(id));
         }
 
         public void Update(Car car)

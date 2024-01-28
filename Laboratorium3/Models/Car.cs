@@ -36,8 +36,8 @@ namespace Laboratorium3.Models
 
         [Display(Name = "Priorytet")]
         public Priority Priority { get; set; }
-       
+
         [HiddenInput]
-        public DateTime Created { get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
     }
 }

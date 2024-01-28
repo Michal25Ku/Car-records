@@ -11,10 +11,18 @@ namespace Data
     public class CarDbContext : DbContext
     {
         public DbSet<CarEntity> Cars { get; set; }
+        private string DbPath { get; set; }
+
+        public CarDbContext()
+        {
+            var folder = Environment.SpecialFolder.LocalApplicationData;
+            var path = Environment.GetFolderPath(folder);
+            DbPath = System.IO.Path.Join(path, "cars.db");
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"data source=d:\Cars.db");
+            optionsBuilder.UseSqlite($"data source={DbPath}");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -23,28 +31,7 @@ namespace Data
                 .HasKey(e => e.CarId);
 
             modelBuilder.Entity<CarEntity>()
-                .HasData(
-                new CarEntity()
-                {
-                    CarId = 1,
-                    Model = "Felicia",
-                    Producer = "Skoda",
-                    EnginePower = 100,
-                    LicensePlateNumber = "KR 90L",
-                    Priority = 1,
-                },
-                new CarEntity()
-                {
-                    CarId = 2,
-                    Model = "Golf 2",
-                    Producer = "Wolkswagen",
-                    EngineCapacity = "1.6",
-                    EnginePower = 120,
-                    LicensePlateNumber = "KR 17K",
-                    Priority = 2,
-                    Created = new DateTime(2000, 10, 10)
-                }
-            );
+                .OwnsOne(c => c.ContactDetails);
         }
     }
 }

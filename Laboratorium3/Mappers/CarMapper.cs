@@ -1,6 +1,7 @@
 ﻿using Data.Entities;
+using Laboratorium3.Models;
 
-namespace Laboratorium3.Models
+namespace Laboratorium3.Mappers
 {
     public static class CarMapper
     {
@@ -8,6 +9,7 @@ namespace Laboratorium3.Models
         {
             return new Car()
             {
+                Id = entity.CarId,
                 Model = entity.Model,
                 Producer = entity.Producer,
                 EngineCapacity = entity.EngineCapacity,
@@ -16,6 +18,13 @@ namespace Laboratorium3.Models
                 LicensePlateNumber = entity.LicensePlateNumber,
                 Created = entity.Created,
                 Priority = (Priority)entity.Priority,
+                Owner = new CarContactDetails()
+                {
+                    FirstName = entity.ContactDetails?.FirstName,
+                    LastName = entity.ContactDetails?.LastName,
+                    PhoneNumber = entity.ContactDetails?.PhoneNumber,
+                    Email = entity.ContactDetails?.Email
+                }
             };
         }
 
@@ -32,6 +41,13 @@ namespace Laboratorium3.Models
                 LicensePlateNumber = model.LicensePlateNumber,
                 Created = model.Created,
                 Priority = (int)model.Priority,
+                ContactDetails = new CarContactDetailsEntity()
+                {
+                    FirstName = model.Owner.FirstName,
+                    LastName = model.Owner.LastName,
+                    PhoneNumber = model.Owner.PhoneNumber,
+                    Email = model.Owner.Email,
+                }
             };
         }
     }

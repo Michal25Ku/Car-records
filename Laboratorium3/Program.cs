@@ -12,7 +12,8 @@ namespace Laboratorium3
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<CarDbContext>();
-            builder.Services.AddSingleton<ICarService, MemoryCarService>();
+            builder.Services.AddTransient<ICarService, EfCarService>();
+            //builder.Services.AddSingleton<ICarService, MemoryCarService>();
             builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
 
             var app = builder.Build();

@@ -20,5 +20,6 @@ namespace Data.Entities
         public string? LicensePlateNumber { get; set; }
         public DateTime Created { get; set; }
         public int Priority { get; set; }
+        public CarContactDetailsEntity ContactDetails { get; set; } = default!;
     }
 }
