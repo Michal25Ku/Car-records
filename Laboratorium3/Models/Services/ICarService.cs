@@ -1,4 +1,6 @@
-﻿namespace Laboratorium3.Models
+﻿using Data.Entities;
+
+namespace Laboratorium3.Models.Services
 {
     public interface ICarService
     {
@@ -7,5 +9,6 @@
         void Update(Car car);
         List<Car> FindAll();
         Car? FindById(int id);
+        List<OwnerEntity> FindAllOwnersForVievModel();
     }
 }

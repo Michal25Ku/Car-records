@@ -6,13 +6,6 @@
     <div>
         Dane samochodu:
         <div>
-            <label asp-for="Priority"></label>
-            <select class="form-control" asp-for="Priority" asp-items="@Html.GetEnumSelectList<Priority>()"></select>
-            <div>
-                <span asp-validation-for="Priority" class="text-danger"></span>
-            </div>
-        </div>
-        <div>
             <label asp-for="Model">Model samochodu</label>
             <input class="form-control" type="text" asp-for="Model" value="@Model.Model"/>
             <div>
@@ -59,39 +52,17 @@
                 <span asp-validation-for="LicensePlateNumber" class="text-danger"></span>
             </div>
         </div>
-        <hr />
         <br>
-        Dane kontaktowe wlasciciela:
         <div>
-            <label asp-for="Owner.FirstName">Imie</label>
-            <input class="form-control" type="text" asp-for="Owner.FirstName" value="@Model.Owner.FirstName" />
+            <label asp-for="State"></label>
+            <select class="form-control" asp-for="State" asp-items="@(Html.GetEnumSelectList<State>())"></select>
             <div>
-                <span asp-validation-for="Owner.FirstName" class="text-danger"></span>
+                <span asp-validation-for="State" class="text-danger"></span>
             </div>
         </div>
         <br>
         <div>
-            <label asp-for="Owner.LastName">Nazwisko</label>
-            <input class="form-control" type="text" asp-for="Owner.LastName" value="@Model.Owner.LastName" />
-            <div>
-                <span asp-validation-for="Owner.LastName" class="text-danger"></span>
-            </div>
-        </div>
-        <br>
-        <div>
-            <label asp-for="Owner.PhoneNumber">Numer telefonu</label>
-            <input class="form-control" type="text" asp-for="Owner.PhoneNumber" value="@Model.Owner.PhoneNumber" />
-            <div>
-                <span asp-validation-for="Owner.PhoneNumber" class="text-danger"></span>
-            </div>
-        </div>
-        <br>
-        <div>
-            <label asp-for="Owner.Email">Adres email</label>
-            <input class="form-control" type="text" asp-for="Owner.Email" value="@Model.Owner.Email" />
-            <div>
-                <span asp-validation-for="Owner.Email" class="text-danger"></span>
-            </div>
+            <select class="form-control" asp-for="OwnerId" asp-items="@Model.Owners"></select>
         </div>
     </div>
     <button type="submit">Zapisz</button>

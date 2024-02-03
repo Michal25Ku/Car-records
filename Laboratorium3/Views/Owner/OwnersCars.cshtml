@@ -1,0 +1,75 @@
+﻿@model List<Car>
+
+    @*TODO*@
+<h2>Samochody właściciela</h2>
+@if (Model.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].Model)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].Producer)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].EngineCapacity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].EnginePower)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].EngineType)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].LicensePlateNumber)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].State)
+            </th>
+            <th scope="col">
+
+            </th>
+        </tr>
+        @foreach (var car in @Model)
+        {
+            <tr>
+                <td>
+                    @car.Model
+                </td>
+                <td>
+                    @car.Producer
+                </td>
+                <td>
+                    @car.EngineCapacity
+                </td>
+                <td>
+                    @car.EnginePower
+                </td>
+                <td>
+                    @car.EnginePower
+                </td>
+                <td>
+                    @car.LicensePlateNumber
+                </td>
+                <td>
+                    @car.State.GetDisplayName()
+                </td>
+                <td>
+                    <a class="btn btn-primary"
+                   asp-action="DetailsCar"
+                   asp-controller="Car"
+                   asp-route-id=@car.Id>
+                        Szczegoly
+                    </a>
+                    <a class="btn btn-primary"
+                   asp-action="DeleteCar"
+                   asp-controller="Car"
+                   asp-route-id=@car.Id>
+                        Usun
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+}

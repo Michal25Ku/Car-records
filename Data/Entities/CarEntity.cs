@@ -11,15 +11,37 @@ namespace Data.Entities
     [Table("Cars")]
     public class CarEntity
     {
-        public int CarId { get; set; }
+        [Key]
+        public int Id { get; set; }
+
+        [MaxLength(50)]
         public string? Model { get; set; }
+
+        [MaxLength(50)]
         public string? Producer { get; set; }
+
+        [MaxLength(50)]
         public string? EngineCapacity { get; set; }
-        public int EnginePower { get; set; }
+
+        [Range(0, int.MaxValue)]
+        public int EnginePower { get; set; } = 0;
+
+        [MaxLength(50)]
         public string? EngineType { get; set; }
+
+        [MaxLength(10)]
         public string? LicensePlateNumber { get; set; }
-        public DateTime Created { get; set; }
-        public int Priority { get; set; }
-        public CarContactDetailsEntity ContactDetails { get; set; } = default!;
+
+
+        [Range(0, int.MaxValue)]
+        public int State { get; set; } = 1;
+
+
+        [Column("CreateDate")]
+        public DateTime? Created { get; set; } = DateTime.Now;
+
+        [Required]
+        public int OwnerId { get; set; }
+        public OwnerEntity? Owner { get; set; }
     }
 }

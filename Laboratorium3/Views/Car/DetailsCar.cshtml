@@ -22,19 +22,7 @@
     Numer rejestracyjny: @Model.LicensePlateNumber
 </div>
 <div class="table-info">
-    Imie wlasciciela: @Model.Owner.FirstName
-</div>
-<div class="table-info">
-    Nazwisko wlasciciela: @Model.Owner.LastName
-</div>
-<div class="table-info">
-    Numer telefonu wlasciciela: @Model.Owner.PhoneNumber
-</div>
-<div class="table-info">
-    Email wlasciciela: @Model.Owner.Email
-</div>
-<div class="table-info">
-    Priorytet: @Model.Priority.GetDisplayName();
+    Stan techniczny: @Model.State.GetDisplayName();
 </div>
 <form asp-action="DetailsCar" asp-controller="Car" method="post">
     <button type="submit">Wróć</button>

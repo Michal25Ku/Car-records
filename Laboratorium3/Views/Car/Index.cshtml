@@ -12,16 +12,19 @@
             @Html.DisplayNameFor(model => model[0].Producer)
         </th>
         <th scope="col">
-            @Html.DisplayNameFor(model => model[0].LicensePlateNumber)
+            @Html.DisplayNameFor(model => model[0].EngineCapacity)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model[0].Owner.FirstName)
+            @Html.DisplayNameFor(model => model[0].EnginePower) (KM)
         </th>
         <th scope="col">
-            @Html.DisplayNameFor(model => model[0].Owner.LastName)
+            @Html.DisplayNameFor(model => model[0].EngineType)
         </th>
         <th scope="col">
-            @Html.DisplayNameFor(model => model[0].Priority)
+            @Html.DisplayNameFor(model => model[0].LicensePlateNumber)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model[0].State)
         </th>
         <th scope="col">
 
@@ -37,16 +40,19 @@
                 @car.Producer
             </td>
             <td>
+                @car.EngineCapacity
+            </td>
+            <td>
+                @car.EnginePower
+            </td>
+            <td>
+                @car.EngineType
+            </td>
+            <td>
                 @car.LicensePlateNumber
             </td>
             <td>
-                @car.Owner.FirstName
-            </td>
-            <td>
-                @car.Owner.LastName
-            </td>
-            <td>
-                @car.Priority.GetDisplayName()
+                @car.State.GetDisplayName()
             </td>
             <td>
                 <a class="btn btn-primary"

@@ -1,5 +1,6 @@
 using Data;
 using Laboratorium3.Models;
+using Laboratorium3.Models.Services;
 
 namespace Laboratorium3
 {
@@ -13,6 +14,7 @@ namespace Laboratorium3
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<CarDbContext>();
             builder.Services.AddTransient<ICarService, EfCarService>();
+            builder.Services.AddTransient<IOwnerService, EfOwnerService>();
             //builder.Services.AddSingleton<ICarService, MemoryCarService>();
             builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
 

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace Laboratorium3.Models
@@ -32,12 +34,16 @@ namespace Laboratorium3.Models
         [Display(Name = "Numer rejestracyjny")]
         public string? LicensePlateNumber { get; set; }
 
-        public CarContactDetails Owner { get; set; } = default!;
-
-        [Display(Name = "Priorytet")]
-        public Priority Priority { get; set; }
+        [Display(Name = "Stan techniczny")]
+        public State State { get; set; }
 
         [HiddenInput]
-        public DateTime Created { get; set; } = DateTime.Now;
+        public DateTime? Created { get; set; } = DateTime.Now;
+
+        [HiddenInput]
+        public int OwnerId { get; set; }
+
+        [ValidateNever]
+        public List<SelectListItem> Owners { get; set; }
     }
 }

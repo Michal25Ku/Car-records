@@ -1,5 +1,7 @@
 ﻿using Laboratorium3.Models;
+using Laboratorium3.Models.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 
 namespace Laboratorium3.Controllers
@@ -21,7 +23,12 @@ namespace Laboratorium3.Controllers
         [HttpGet]
         public IActionResult CreateCar()
         {
-            return View();
+            Car model = new Car();
+            model.Owners = _carService
+                .FindAllOwnersForVievModel()
+                .Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.FirstName + ' ' + o.LastName})
+                .ToList();
+            return View(model);
         }
 
         [HttpPost]
@@ -43,7 +50,13 @@ namespace Laboratorium3.Controllers
         {
             if (_carService.FindById(id) is not null)
             {
-                return View(_carService.FindById(id));
+                Car model = _carService.FindById(id);
+                model.Owners = _carService
+                    .FindAllOwnersForVievModel()
+                    .Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.FirstName + ' ' + o.LastName })
+                    .ToList();
+
+                return View(model);
             }
             else
             {
@@ -61,7 +74,7 @@ namespace Laboratorium3.Controllers
             }
             else
             {
-                return View();
+                return View(car.Id);
             }
         }
 

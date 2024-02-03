@@ -1,0 +1,9 @@
+﻿@using Laboratorium3.Models
+@model Owner
+<form asp-action="Delete" asp-controller="Owner" method="post">
+    <h3>Czy na pewno chcesz usunąć ten rekord?</h3>
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-danger">Tak</button>
+    <a asp-action="AllOwners" asp-controller="Owner" class="btn btn-secondary">Nie</a>
+</form>

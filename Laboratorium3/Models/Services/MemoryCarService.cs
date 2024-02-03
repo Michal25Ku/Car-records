@@ -1,4 +1,6 @@
-﻿namespace Laboratorium3.Models
+﻿using Data.Entities;
+
+namespace Laboratorium3.Models.Services
 {
     public class MemoryCarService : ICarService
     {
@@ -27,6 +29,11 @@
         public List<Car> FindAll()
         {
             return _cars.Values.ToList();
+        }
+
+        public List<OwnerEntity> FindAllOwnersForVievModel()
+        {
+            throw new NotImplementedException();
         }
 
         public Car? FindById(int id)

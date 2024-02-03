@@ -1,0 +1,97 @@
+﻿@model List<Owner>
+
+<h2>Lista właścicieli</h2>
+@if (Model.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].FirstName)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].LastName)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].Pesel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].PhoneNumber)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].Email)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].City)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].Street)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].PostalCode)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model[0].Region)
+            </th>
+            <th scope="col">
+
+            </th>
+        </tr>
+        @foreach (var owner in @Model)
+        {
+            <tr>
+                <td>
+                    @owner.FirstName
+                </td>
+                <td>
+                    @owner.LastName
+                </td>
+                <td>
+                    @owner.Pesel
+                </td>
+                <td>
+                    @owner.PhoneNumber
+                </td>
+                <td>
+                    @owner.Email
+                </td>
+                <td>
+                    @owner.City
+                </td>
+                <td>
+                    @{
+                        string? street = @owner.Street;
+                        if(street is null)
+                           street = "-";
+                    }  
+                    @street
+                </td>
+                <td>
+                    @owner.PostalCode
+                </td>
+                <td>
+                    @owner.Region
+                </td>
+                <td>
+                    <a class="btn btn-primary"
+               asp-action="EditOwner"
+               asp-controller="Owner"
+               asp-route-id=@owner.Id>
+                        Edytuj
+                    </a>
+                    <a class="btn btn-primary"
+               asp-action="OwnersCars"
+               asp-controller="Owner"
+               asp-route-id=@owner.Id>
+                        Pokaż auta
+                    </a>
+                    <a class="btn btn-primary"
+               asp-action="DeleteOwner"
+               asp-controller="Owner"
+               asp-route-id=@owner.Id>
+                        Usun
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+}

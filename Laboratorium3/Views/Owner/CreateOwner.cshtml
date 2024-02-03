@@ -1,0 +1,76 @@
+﻿@using Laboratorium3.Models
+@model Owner
+<h2>Dodaj nowego właściciela</h2>
+<form asp-action="CreateOwner" asp-controller="Owner" method="post">
+    @*<div asp-validation-summary="All"></div>*@
+    <div>
+        <div>
+            <label asp-for="FirstName"></label>
+            <input class="form-control" type="text" asp-for="FirstName" />
+            <div>
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="LastName"></label>
+            <input class="form-control" type="text" asp-for="LastName" />
+            <div>
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="Pesel"></label>
+            <input class="form-control" type="text" asp-for="Pesel" />
+            <div>
+                <span asp-validation-for="Pesel" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="PhoneNumber"></label>
+            <input class="form-control" type="text" asp-for="PhoneNumber" />
+            <div>
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="Email"></label>
+            <input class="form-control" type="text" asp-for="Email" />
+            <div>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <label asp-for="City"></label>
+            <input class="form-control" type="text" asp-for="City" />
+            <div>
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <label asp-for="Street"></label>
+            <input class="form-control" type="text" asp-for="Street" />
+            <div>
+                <span asp-validation-for="Street" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <label asp-for="PostalCode"></label>
+            <input class="form-control" type="text" asp-for="PostalCode" />
+            <div>
+                <span asp-validation-for="PostalCode" class="text-danger"></span>
+            </div>
+        </div>
+        <div>
+            <label asp-for="Region"></label>
+            <input class="form-control" type="text" asp-for="Region" />
+            <div>
+                <span asp-validation-for="Region" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <button class="btn" type="submit">Zapisz</button>
+</form>

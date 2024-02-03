@@ -1,7 +1,8 @@
 ﻿using Data;
+using Data.Entities;
 using Laboratorium3.Mappers;
 
-namespace Laboratorium3.Models
+namespace Laboratorium3.Models.Services
 {
     public class EfCarService : ICarService
     {
@@ -16,13 +17,13 @@ namespace Laboratorium3.Models
         {
             var e = _context.Cars.Add(CarMapper.ToEntity(car));
             _context.SaveChanges();
-            return e.Entity.CarId;
+            return e.Entity.Id;
         }
 
         public void Delete(int id)
         {
             var entity = _context.Cars.Find(id);
-            if(entity != null)
+            if (entity != null)
             {
                 _context.Cars.Remove(entity);
                 _context.SaveChanges();
@@ -33,6 +34,8 @@ namespace Laboratorium3.Models
         {
             return _context.Cars.Select(e => CarMapper.FromEntity(e)).ToList();
         }
+
+        public List<OwnerEntity> FindAllOwnersForVievModel() => _context.Owners.ToList();
 
         public Car? FindById(int id)
         {
