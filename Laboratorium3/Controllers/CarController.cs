@@ -1,11 +1,13 @@
 ﻿using Laboratorium3.Models;
 using Laboratorium3.Models.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 
 namespace Laboratorium3.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class CarController : Controller
     {
         private readonly ICarService _carService;
@@ -15,11 +17,13 @@ namespace Laboratorium3.Controllers
             _carService = carService;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View(_carService.FindAll());
         }
 
+        [Authorize(Roles = "user")]
         [HttpGet]
         public IActionResult CreateCar()
         {
@@ -31,6 +35,7 @@ namespace Laboratorium3.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "user")]
         [HttpPost]
         public IActionResult CreateCar(Models.Car car)
         {
@@ -45,6 +50,7 @@ namespace Laboratorium3.Controllers
             }
         }
 
+        [Authorize(Roles = "user")]
         [HttpGet]
         public IActionResult EditCar(int id)
         {
@@ -64,6 +70,7 @@ namespace Laboratorium3.Controllers
             }
         }
 
+        [Authorize(Roles = "user")]
         [HttpPost]
         public IActionResult EditCar(Car car)
         {
@@ -78,6 +85,7 @@ namespace Laboratorium3.Controllers
             }
         }
 
+        [Authorize(Roles = "user")]
         [HttpGet]
         public IActionResult DeleteCar(int id)
         {
@@ -91,6 +99,7 @@ namespace Laboratorium3.Controllers
             }
         }
 
+        [Authorize(Roles = "user")]
         [HttpPost]
         public IActionResult Delete(int id)
         {
@@ -98,6 +107,7 @@ namespace Laboratorium3.Controllers
             return RedirectToAction("Index");
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult DetailsCar(int id)
         {
@@ -111,6 +121,7 @@ namespace Laboratorium3.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult DetailsCar()
         {

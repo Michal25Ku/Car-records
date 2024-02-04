@@ -1,6 +1,8 @@
 using Data;
 using Laboratorium3.Models;
 using Laboratorium3.Models.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Laboratorium3
 {
@@ -9,14 +11,25 @@ namespace Laboratorium3
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var connectionString = builder.Configuration.GetConnectionString("CarDbContextConnection") ?? throw new InvalidOperationException("Connection string 'CarDbContextConnection' not found.");
 
             // Add services to the container.
+            builder.Services.AddRazorPages();
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<CarDbContext>();
+
+            builder.Services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<CarDbContext>();
+            //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<CarDbContext>();
+            
             builder.Services.AddTransient<ICarService, EfCarService>();
             builder.Services.AddTransient<IOwnerService, EfOwnerService>();
             //builder.Services.AddSingleton<ICarService, MemoryCarService>();
             builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
+
+            builder.Services.AddMemoryCache();
+            builder.Services.AddSession();
 
             var app = builder.Build();
 
@@ -33,7 +46,10 @@ namespace Laboratorium3
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
+            app.MapRazorPages();
 
             app.MapControllerRoute(
                 name: "default",

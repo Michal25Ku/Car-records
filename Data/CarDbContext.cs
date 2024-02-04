@@ -1,4 +1,6 @@
 ﻿using Data.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public class CarDbContext : DbContext
+    public class CarDbContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<CarEntity> Cars { get; set; }
         public DbSet<OwnerEntity> Owners { get; set; }
@@ -28,6 +30,71 @@ namespace Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            string ADMIN_ID = Guid.NewGuid().ToString();
+            string ROLE_ID = Guid.NewGuid().ToString();
+
+            string USER_ID = Guid.NewGuid().ToString();
+            string ROLE_USER_ID = Guid.NewGuid().ToString();
+
+            PasswordHasher<IdentityUser> ph = new PasswordHasher<IdentityUser>();
+
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole
+                {
+                    Name = "admin",
+                    NormalizedName = "ADMIN",
+                    Id = ROLE_ID,
+                    ConcurrencyStamp = ROLE_ID
+                },
+                new IdentityRole
+                {
+                    Name = "user",
+                    NormalizedName = "USER",
+                    Id = ROLE_USER_ID,
+                    ConcurrencyStamp = ROLE_USER_ID
+                });
+
+            var admin = new IdentityUser
+            {
+                Id = ADMIN_ID,
+                Email = "michal@gmail.com",
+                EmailConfirmed = true,
+                UserName = "admin",
+                NormalizedUserName = "ADMIN",
+                NormalizedEmail = "MICHAL@GMAIL.COM",
+            };
+
+            admin.PasswordHash = ph.HashPassword(admin, "Q@wertyuiop123");
+
+            var user = new IdentityUser
+            {
+                Id = USER_ID,
+                Email = "jan@wp.pl",
+                EmailConfirmed = true,
+                UserName = "jan",
+                NormalizedUserName = "JAN",
+                NormalizedEmail = "JAN@WP.PL",
+            };
+
+            user.PasswordHash = ph.HashPassword(user, "Abc123!@");
+
+            modelBuilder.Entity<IdentityUser>().HasData(admin, user);
+
+            modelBuilder.Entity<IdentityUserRole<string>>()
+                .HasData(
+                new IdentityUserRole<string>
+                {
+                    RoleId = ROLE_ID,
+                    UserId = ADMIN_ID,
+                },
+                new IdentityUserRole<string>
+                {
+                    RoleId = ROLE_USER_ID,
+                    UserId = USER_ID,
+                });
+
             modelBuilder.Entity<CarEntity>()
                 .HasOne(e => e.Owner)
                 .WithMany(c => c.Cars)
