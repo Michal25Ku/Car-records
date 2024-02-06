@@ -1,5 +1,6 @@
 ﻿@using Laboratorium3.Models
 @model Car
+
 <h2>Dodaj nowy pojazd</h2>
 <form asp-action="CreateCar" asp-controller="Car" method="post">
     @*<div asp-validation-summary="All"></div>*@
@@ -61,8 +62,46 @@
         </div>
         <br>
         <div>
-            <select class="form-control" asp-for="OwnerId" asp-items="@Model.Owners"></select>
+            <label for="filter">Filtr właścicieli</label>
+            <input class="form-control mb-3" type="text" name="filter" id="filter"/>
+            <label asp-for="OwnerId">Właściciel</label>
+            <select class="form-control mb-3" asp-for="OwnerId"></select>
         </div>
     </div>
     <button class="btn" type="submit">Zapisz</button>
 </form>
+
+@section Scripts
+{
+    <script>
+        let select = document.getElementById("OwnerId");
+        let filter = document.getElementById("filter");
+        filter.onchange = function (e) 
+        {
+            if (filter.value.length == 0) 
+            {
+                return;
+            }
+            fetch(`/api/owners?filter=${filter.value}`)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json()
+                    }
+                    throw "No OK, actual status " + response.status;
+                })
+                .then(json => {
+                    select.innerHTML = '';
+                    for (let item of json) 
+                    {
+                        let option = document.createElement('option');
+                        option.setAttribute('value', item.id);
+                        option.innerText = item.lastName;
+                        select.appendChild(option);
+                    }
+                })
+                .catch(e => {
+                    console.log('Cant get data from api', e);
+                });
+        };
+    </script>
+}

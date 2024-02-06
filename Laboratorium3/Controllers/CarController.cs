@@ -20,10 +20,10 @@ namespace Laboratorium3.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+            ViewData["Visit"] = Response.HttpContext.Items[LastVisitCookie.CookieName];
             return View(_carService.FindAll());
         }
 
-        [Authorize(Roles = "user")]
         [HttpGet]
         public IActionResult CreateCar()
         {
@@ -35,7 +35,6 @@ namespace Laboratorium3.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "user")]
         [HttpPost]
         public IActionResult CreateCar(Models.Car car)
         {
@@ -50,7 +49,6 @@ namespace Laboratorium3.Controllers
             }
         }
 
-        [Authorize(Roles = "user")]
         [HttpGet]
         public IActionResult EditCar(int id)
         {
@@ -70,7 +68,6 @@ namespace Laboratorium3.Controllers
             }
         }
 
-        [Authorize(Roles = "user")]
         [HttpPost]
         public IActionResult EditCar(Car car)
         {
@@ -85,7 +82,6 @@ namespace Laboratorium3.Controllers
             }
         }
 
-        [Authorize(Roles = "user")]
         [HttpGet]
         public IActionResult DeleteCar(int id)
         {
@@ -99,7 +95,6 @@ namespace Laboratorium3.Controllers
             }
         }
 
-        [Authorize(Roles = "user")]
         [HttpPost]
         public IActionResult Delete(int id)
         {
@@ -107,7 +102,6 @@ namespace Laboratorium3.Controllers
             return RedirectToAction("Index");
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public IActionResult DetailsCar(int id)
         {
@@ -121,7 +115,6 @@ namespace Laboratorium3.Controllers
             }
         }
 
-        [AllowAnonymous]
         [HttpPost]
         public IActionResult DetailsCar()
         {
@@ -134,5 +127,29 @@ namespace Laboratorium3.Controllers
                 return View();
             }
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateApi(Car c)
+        {
+            if (ModelState.IsValid) 
+            {
+                _carService.Add(c);
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult CreateApi()
+        {
+            return View();
+        }
+
+        //[HttpGet]
+        //public IActionResult Edit(int id)
+        //{
+        //    return View();
+        //}
     }
 }
