@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 namespace Laboratorium3.Controllers
 {
-    [Authorize(Roles = "admin")]
     public class CarController : Controller
     {
         private readonly ICarService _carService;
@@ -24,6 +23,7 @@ namespace Laboratorium3.Controllers
             return View(_carService.FindAll());
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult CreateCar()
         {
@@ -35,8 +35,9 @@ namespace Laboratorium3.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpPost]
-        public IActionResult CreateCar(Models.Car car)
+        public IActionResult CreateCar(Car car)
         {
             if (ModelState.IsValid)
             {
@@ -49,6 +50,20 @@ namespace Laboratorium3.Controllers
             }
         }
 
+        [Authorize]
+        [HttpGet]
+        public IActionResult CreateCarForCurrentOwner(int id)
+        {
+            Car model = new Car();
+            model.Owners = _carService
+                .FindAllOwnersForVievModel()
+                .Select(o => new SelectListItem() { Value = o.Id.ToString(), Text = o.FirstName + ' ' + o.LastName })
+                .Where(o => int.Parse(o.Value) == id)
+                .ToList();
+            return View(model);
+        }
+
+        [Authorize]
         [HttpGet]
         public IActionResult EditCar(int id)
         {
@@ -68,6 +83,7 @@ namespace Laboratorium3.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult EditCar(Car car)
         {
@@ -82,6 +98,7 @@ namespace Laboratorium3.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult DeleteCar(int id)
         {
@@ -95,6 +112,7 @@ namespace Laboratorium3.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult Delete(int id)
         {
@@ -102,6 +120,7 @@ namespace Laboratorium3.Controllers
             return RedirectToAction("Index");
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult DetailsCar(int id)
         {
@@ -115,6 +134,7 @@ namespace Laboratorium3.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult DetailsCar()
         {
@@ -127,29 +147,5 @@ namespace Laboratorium3.Controllers
                 return View();
             }
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult CreateApi(Car c)
-        {
-            if (ModelState.IsValid) 
-            {
-                _carService.Add(c);
-                return RedirectToAction(nameof(Index));
-            }
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult CreateApi()
-        {
-            return View();
-        }
-
-        //[HttpGet]
-        //public IActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
     }
 }

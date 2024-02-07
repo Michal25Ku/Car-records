@@ -1,0 +1,70 @@
+﻿@using Laboratorium3.Models
+@model Car
+
+<h2>Dodaj nowy pojazd</h2>
+<form asp-action="CreateCar" asp-controller="Car" method="post">
+    @*<div asp-validation-summary="All"></div>*@
+    <div>
+        <div>
+            <label asp-for="Model"></label>
+            <input class="form-control" type="text" asp-for="Model" />
+            <div>
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="Producer"></label>
+            <input class="form-control" type="text" asp-for="Producer" />
+            <div>
+                <span asp-validation-for="Producer" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="EngineCapacity"></label>
+            <input class="form-control" type="number" asp-for="EngineCapacity" step="0.1" />
+            <div>
+                <span asp-validation-for="EngineCapacity" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="EnginePower"></label>
+            <input class="form-control" type="number" asp-for="EnginePower" />
+            <div>
+                <span asp-validation-for="EnginePower" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="EngineType"></label>
+            <input class="form-control" type="text" asp-for="EngineType" />
+            <div>
+                <span asp-validation-for="EngineType" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="LicensePlateNumber"></label>
+            <input class="form-control" type="text" asp-for="LicensePlateNumber" />
+            <div>
+                <span asp-validation-for="LicensePlateNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="State">Stan techniczny pojazdu</label>
+            <select class="form-control" asp-for="State" asp-items="@(Html.GetEnumSelectList<State>())"></select>
+            <div>
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+        </div>
+        <br>
+        <div>
+            <label asp-for="OwnerId">Wlasciciel</label>
+            <select class="form-control" type="text" asp-for="OwnerId" asp-items="@Model.Owners" readonly></select>
+        </div>
+    </div>
+    <button class="btn" type="submit">Zapisz</button>
+</form>

@@ -1,6 +1,7 @@
 ﻿using Laboratorium3.Mappers;
 using Laboratorium3.Models;
 using Laboratorium3.Models.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -15,17 +16,20 @@ namespace Laboratorium3.Controllers
             _ownerService = ownerService;
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult AllOwners()
         {
             return View(_ownerService.FindAll());
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult CreateOwner()
         {
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult CreateOwner(Owner owner)
         {
@@ -40,6 +44,7 @@ namespace Laboratorium3.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult EditOwner(int id)
         {
@@ -53,6 +58,7 @@ namespace Laboratorium3.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult EditOwner(Owner owner)
         {
@@ -67,6 +73,7 @@ namespace Laboratorium3.Controllers
             }
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult DeleteOwner(int id)
         {
@@ -80,6 +87,7 @@ namespace Laboratorium3.Controllers
             }
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult Delete(int id)
         {
@@ -87,6 +95,7 @@ namespace Laboratorium3.Controllers
             return RedirectToAction("AllOwners");
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult OwnersCars(int id)
         {
@@ -106,6 +115,7 @@ namespace Laboratorium3.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult OwnersCars()
         {

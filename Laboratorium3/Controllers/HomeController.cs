@@ -15,6 +15,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        ViewData["Visit"] = Response.HttpContext.Items[LastVisitCookie.CookieName];
         return View();
     }
 

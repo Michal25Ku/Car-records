@@ -33,7 +33,7 @@ namespace Laboratorium3.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Proszę podać nazwa miasta/wioski!")]
-        [Display(Name = "Nazwa miasta/wioski")]
+        [Display(Name = "Nazwa miejscowości")]
         public string City { get; set; }
 
         [Display(Name = "Nazwa ulicy")]
