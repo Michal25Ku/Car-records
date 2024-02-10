@@ -16,7 +16,7 @@ namespace Laboratorium3.Controllers
             _ownerService = ownerService;
         }
 
-        [Authorize(Roles = "admin")]
+        [Authorize]
         public IActionResult AllOwners()
         {
             return View(_ownerService.FindAll());
@@ -102,6 +102,12 @@ namespace Laboratorium3.Controllers
             if (_ownerService.FindById(id) is not null)
             {
                 List<Car> cars = new List<Car>();
+                if(_ownerService.FindAllCarsForOwner(id).Count <= 0)
+                {
+                    cars.Add(new Car() { OwnerId = id });
+                    return View(cars);
+                }
+
                 foreach (var c in _ownerService.FindAllCarsForOwner(id))
                 {
                     cars.Add(CarMapper.FromEntity(c));

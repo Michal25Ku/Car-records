@@ -36,7 +36,6 @@ namespace Data.Entities
         [Range(0, int.MaxValue)]
         public int State { get; set; } = 1;
 
-
         [Column("CreateDate")]
         public DateTime? Created { get; set; } = DateTime.Now;
 
