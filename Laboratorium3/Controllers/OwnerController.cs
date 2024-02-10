@@ -102,11 +102,6 @@ namespace Laboratorium3.Controllers
             if (_ownerService.FindById(id) is not null)
             {
                 List<Car> cars = new List<Car>();
-                if(_ownerService.FindAllCarsForOwner(id).Count <= 0)
-                {
-                    cars.Add(new Car() { OwnerId = id });
-                    return View(cars);
-                }
 
                 foreach (var c in _ownerService.FindAllCarsForOwner(id))
                 {
